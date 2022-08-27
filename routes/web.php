@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OffCodeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -20,11 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login');
 Route::get('login/{seller?}', [AuthController::class, 'showLoginForm'])->name('login');
 Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('verify');
-
-
 Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('offcode/{seller}', [OffCodeController::class, 'getOffcode']);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);

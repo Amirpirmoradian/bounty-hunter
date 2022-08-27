@@ -3,83 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\OffCode;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class OffCodeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getOffcode(Request $request, $seller)
     {
-        //
-    }
+        $user = auth()->user();
+        if(User::where('username', $seller)->exists()){
+            $seller = User::where('username', $seller)->first();
+            if(OffCode::where('seller_id', $seller->id)->where('customer_id', $user->id)->exists()){
+                $offcode = null;
+                return view('offcode', compact('offcode'));
+            }
+            if(OffCode::where('seller_id', $seller->id)->where('used', false)->exists()){
+                $offcode = OffCode::where('seller_id', $seller->id)->where('used', false)->first();
+                $offcode->used = true;
+                $offcode->customer_id = $user->id;
+                $offcode->save();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+                return view('offcode', compact('offcode'));
+            }
+        }
+        return view('offcode');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OffCode  $offCode
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OffCode $offCode)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OffCode  $offCode
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OffCode $offCode)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OffCode  $offCode
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OffCode $offCode)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OffCode  $offCode
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OffCode $offCode)
-    {
-        //
+        return abort(404, 'Not found');
     }
 }

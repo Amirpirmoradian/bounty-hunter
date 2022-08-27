@@ -4,11 +4,13 @@ body{
     font-family: 'Vazir', sans-serif;
 }
 .navbar-light .navbar-brand, .navbar-light .navbar-brand img{
-    width: 200px;
+    width: 120px;
     display: block;
     margin: 20px auto 0;
 }
-
+.btn{
+    border-radius: 15px;
+}
 .btn-primary{
     background-color: #D60644;
     border-color: #D60644;
@@ -28,4 +30,17 @@ body{
 
 .btn-secendary:hover{
     color: white;
+}
+
+.offcode-container{
+    text-align: center;
+}
+
+.offcode{
+    margin: 20px 0;
+    border-radius: 15px;
+    border: 3px solid #D60644;
+    padding: 5px 20px;
+    display: inline-block;
+    font-weight: bold;
 }

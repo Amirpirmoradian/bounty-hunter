@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->integer('seller_id');
+            $table->integer('customer_id')->nullable();
             $table->boolean('used')->default(false);
             $table->timestamps();
         });
