@@ -6,7 +6,7 @@ use App\Models\OffCode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-
+use Kavenegar;
 class OffCodeController extends Controller
 {
     public function getOffcode(Request $request, $seller)
@@ -23,6 +23,12 @@ class OffCodeController extends Controller
                 $offcode->used = true;
                 $offcode->customer_id = $user->id;
                 $offcode->save();
+
+                try{
+                    $result = Kavenegar::VerifyLookup($user->phone_number, $offcode->code, '', '', 'bounty-offcode');
+                }catch(\Kavenegar\Exceptions\ApiException $e){
+                    echo $e->errorMessage();
+                }
 
                 return view('offcode', compact('offcode'));
             }
