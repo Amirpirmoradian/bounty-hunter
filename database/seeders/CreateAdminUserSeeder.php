@@ -20,6 +20,7 @@ class CreateAdminUserSeeder extends Seeder
             'first_name' => 'امیر', 
             'last_name' => 'پیرمرادیان', 
             'type' => 'admin', 
+            'username' => 'piramir77', 
             'phone_number' => '09134744677', 
             'mootanroo_id' => '275284',
             'phone_number_verified_at' => now()
@@ -32,6 +33,7 @@ class CreateAdminUserSeeder extends Seeder
         $user = User::create([
             'first_name' => 'محسن', 
             'last_name' => 'قائم مقامی', 
+            'username' => 'webgodo', 
             'type' => 'admin', 
             'phone_number' => '09131678992', 
             'mootanroo_id' => '272419',

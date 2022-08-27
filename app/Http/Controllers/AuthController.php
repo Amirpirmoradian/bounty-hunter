@@ -111,7 +111,7 @@ class AuthController extends Controller
             curl_close($ch);
             Auth::login(User::where('phone_number', $phoneNumber)->first());
             
-            return redirect()->route('panel');
+            return redirect()->intended('panel');
         }
     }
 }
