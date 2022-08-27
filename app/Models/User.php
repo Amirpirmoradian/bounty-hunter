@@ -25,6 +25,7 @@ class User extends Authenticatable
         'mootanroo_id',
         'phone_number',
         'password',
+        'referred_by',
         'phone_number_verified_at'
     ];
 

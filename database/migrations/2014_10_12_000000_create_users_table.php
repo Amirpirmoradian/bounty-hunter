@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone_number')->unique();
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->integer('mootanroo_id');
+            $table->integer('referred_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
