@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'login');
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('verify');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);

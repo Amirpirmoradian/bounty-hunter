@@ -1,0 +1,31 @@
+@import url('https://v1.fontapi.ir/css/Vazir');
+
+body{
+    font-family: 'Vazir', sans-serif;
+}
+.navbar-light .navbar-brand, .navbar-light .navbar-brand img{
+    width: 200px;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.btn-primary{
+    background-color: #D60644;
+    border-color: #D60644;
+}
+
+.btn-primary:hover{
+    background-color: white;
+    color: #D60644;
+    border-color: #D60644;
+}
+
+
+.btn-secendary{
+    background-color: #c0c0c0;
+    border-color: #c0c0c0;
+}
+
+.btn-secendary:hover{
+    color: white;
+}

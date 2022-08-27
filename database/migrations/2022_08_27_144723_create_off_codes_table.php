@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('off_codes', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
+            $table->integer('seller_id');
+            $table->boolean('used')->default(false);
             $table->timestamps();
         });
     }
