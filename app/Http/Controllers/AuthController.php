@@ -8,18 +8,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
     use AuthenticatesUsers;
 
-    public function showLoginForm()
+    public function showLoginForm($seller = null)
     {
+        if($seller != null){
+            Cookie::queue('referred_by', $seller, 3600);
+        }
         return view('auth.login');
     }
 
     public function showVerifyForm(VerifyRequest $request)
     {
+        
         $phoneNumber = $request->phone_number;
         $data = [
             'mobile' => $phoneNumber
@@ -73,25 +78,38 @@ class AuthController extends Controller
             ]);
         } elseif ($httpcode == 200) {
             if (User::where('phone_number', $phoneNumber)->exists()) {
-                $user = User::where('phone_number', $phoneNumber)->update([
+                $referredBy = null;
+                if(Cookie::get('referred_by', false)){
+                    if(User::where('username', Cookie::get('referred_by', false))->exists()){
+                        $referredBy = User::where('username', Cookie::get('referred_by', false))->first()->id;
+                    }
+                }
+                User::where('phone_number', $phoneNumber)->update([
                     'first_name'    => $response->result->userInfo->firstName,
                     'last_name'    => $response->result->userInfo->lastName,
                     'mootanroo_id'  => $response->result->userInfo->id,
-                    'phone_number_verified_at'  => now()
+                    'phone_number_verified_at'  => now(),
+                    'referred_by'  => $referredBy,
                 ]);
             } else {
-                $user = Customers::create([
+                $referredBy = null;
+                if(Cookie::get('referred_by', false)){
+                    if(User::where('username', Cookie::get('referred_by', false))->exists()){
+                        $referredBy = User::where('username', Cookie::get('referred_by', false))->first()->id;
+                    }
+                }
+                Customers::create([
                     'phone_number' => $phoneNumber,
                     'first_name'    => $response->result->userInfo->firstName,
                     'last_name'    => $response->result->userInfo->lastName,
                     'mootanroo_id'  => $response->result->userInfo->id,
-                    'phone_number_verified_at'  => now()
+                    'phone_number_verified_at'  => now(),
+                    'referred_by'  => $referredBy,
                 ]);
             }
 
             curl_close($ch);
             Auth::login(User::where('phone_number', $phoneNumber)->first());
-
             
             return redirect()->route('panel');
         }
