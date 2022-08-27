@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OffCode extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'code',
+        'seller_id',
+    ];
 }
