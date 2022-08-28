@@ -39,4 +39,33 @@ class PanelController extends Controller
         return view('panel.shelf', compact('products', 'totalAmount', 'totalSold', 'totalInStock'));
 
     }
+
+
+    public function shelfInStock(Request $request)
+    {
+
+        $seller = auth()->user();
+        $products = $seller->products()->where('quantity', '!=', 0)->get();
+
+        return view('panel.shelfInStock', compact('products'));
+
+    }
+
+    public function shelfSold(Request $request)
+    {
+        $seller = auth()->user();
+        $orders = $seller->sellerOrders;
+
+        return view('panel.sold', compact('orders'));
+
+    }
+
+
+    public function orders(Request $request)
+    {
+        # code...
+    }
+    
+
+    
 }

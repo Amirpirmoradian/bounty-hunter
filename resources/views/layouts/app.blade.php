@@ -46,10 +46,10 @@
                                 <a class="nav-link" href="{{ route('shelf') }}">{{ __('قفسه') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('panel') }}">{{ __('موجودی') }}</a>
+                                <a class="nav-link" href="{{ route('shelfInStock') }}">{{ __('موجودی') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('panel') }}">{{ __('سفارشات') }}</a>
+                                <a class="nav-link" href="{{ route('shelfSold') }}">{{ __('سفارشات') }}</a>
                             </li>
                         @endif
                         
