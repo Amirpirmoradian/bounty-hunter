@@ -20,6 +20,10 @@ class CartController extends Controller
         return view('cart', compact('cart', 'seller'));
     }
 
+    public function checkout(Request $request)
+    {
+        $cart = session('cart');
+        
+    }
 
-    
 }
