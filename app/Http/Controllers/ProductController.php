@@ -14,23 +14,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-         $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
-        return view('products.index',compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $products = Product::paginate(15);
+
+        return view('products.index',compact('products'));
     }
     
     /**
@@ -52,14 +40,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'mootanroo_id' => 'required|numeric',
+            'name' => 'required|string',
+            'media_url' => 'required|string',
+            'price' => 'required|numeric',
         ]);
     
         Product::create($request->all());
     
-        return redirect()->route('products.index')
-                        ->with('success','Product created successfully.');
+        return redirect()->back()
+                        ->with('success','محصول با موفقیت ساخته شد.');
     }
     
     /**
@@ -70,7 +60,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show',compact('product'));
     }
     
     /**
@@ -81,7 +70,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit',compact('product'));
+
+        $currentProduct = $product;
+        $products = Product::paginate(15);
+
+        return view('products.index',compact('products', 'currentProduct'));
     }
     
     /**
@@ -93,15 +86,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+        request()->validate([
+            'mootanroo_id' => 'required|numeric',
+            'name' => 'required|string',
+            'media_url' => 'required|string',
+            'price' => 'required|numeric',
         ]);
     
         $product->update($request->all());
     
-        return redirect()->route('products.index')
-                        ->with('success','Product updated successfully');
+        return redirect()->back()->with('success','Product updated successfully');
     }
     
     /**

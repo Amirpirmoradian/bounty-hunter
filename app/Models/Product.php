@@ -14,7 +14,7 @@ class Product extends Model
         'mootanroo_id',
         'name',
         'price',
-        'media_id'
+        'media_url'
     ];
 
     
