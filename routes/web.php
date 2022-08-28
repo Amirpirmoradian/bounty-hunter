@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OffCodeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
@@ -83,4 +84,20 @@ Route::group([
 
 
     Route::redirect('/', route('admin-orders-list'));
+});
+
+
+
+
+
+Route::group([
+    'prefix' => '/panel',
+    'middleware' => ['auth', 'seller'],
+], function () {
+    Route::get('/', [PanelController::class, 'index'])->name('panel');
+    Route::get('/referrals', [PanelController::class, 'referrals'])->name('referrals');
+    Route::get('/shelf', [PanelController::class, 'shelf'])->name('shelf');
+    Route::get('/shelf/instock', [PanelController::class, 'shelfInStock'])->name('shelfInStock');
+    Route::get('/shelf/sold', [PanelController::class, 'shelfSold'])->name('shelfSold');
+    Route::get('/order/{order}', [PanelController::class, 'orders'])->name('orders');
 });
