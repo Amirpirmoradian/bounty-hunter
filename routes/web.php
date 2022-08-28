@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group([
     'prefix' => '/admin',
-    'middleware' => ['auth'],
+    'middleware' => ['auth', 'admin'],
 ], function () {
     Route::get('/', [AdminController::class, 'index']);
     
