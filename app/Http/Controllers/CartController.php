@@ -42,7 +42,7 @@ class CartController extends Controller
                     'quantity' => $product['quantity']
                 ]);
             }
-
+            //TODO we need to check for remaining quantity in seller saloon
             session()->flash('cart');
 
             return view('checkout', compact('order', 'seller'));

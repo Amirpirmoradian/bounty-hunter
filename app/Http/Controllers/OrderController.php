@@ -47,7 +47,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+    
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
@@ -82,5 +83,23 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function clear(Order $order)
+    {
+        $order->cleared = true;
+        $order->save();
+
+
+        return redirect()->back()->with('success', trans('سفارش تسویه شد'));
+    }
+
+    public function unclear(Order $order)
+    {
+        $order->cleared = false;
+        $order->save();
+
+        return redirect()->back()->with('success', trans('سفارش از وضعیت تسویه خارج شد'));
+
     }
 }

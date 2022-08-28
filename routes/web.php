@@ -61,9 +61,11 @@ Route::group([
         'names' => [
             'index' => 'admin-orders-list',
             'show' => 'admin-orders-show',
-            'destroy' => 'admin-orders-delete',
-            'update' => 'admin-orders-update',
         ],
     ]);
+    Route::get('clear/{order}', [OrderController::class, 'clear'])->name('admin-orders-clear');
+    Route::get('unclear/{order}', [OrderController::class, 'unclear'])->name('admin-orders-unclear');
+
+
     Route::redirect('/', route('admin-orders-list'));
 });

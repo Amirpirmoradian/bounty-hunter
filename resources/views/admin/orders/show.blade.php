@@ -1,0 +1,141 @@
+@extends('admin.layout.index')
+
+@section('content')
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    {{ __('سفارش') }}
+                </h2>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table" id="branches-table">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title" style="display: table-cell">{{ __('شماره') }}</th>
+                                <th class="column-title" style="display: table-cell">{{ __('مشتری') }}</th>
+                                <th class="column-title" style="display: table-cell;">{{ __('فروشنده') }}</th>
+                                <th class="column-title" style="display: table-cell;">مبلغ کل</th>
+                                <th class="column-title" style="display: table-cell;">تسویه شده</th>
+                                <th class="column-title no-link last" style="display: table-cell">
+                                    <span class="nobr">
+                                        {{ __('عملیات') }}
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="even pointer">
+                                <td>
+                                    {{ $order->id }}
+                                </td>
+                                
+                                <td>
+                                    {{ $order->customer->FullName }}
+                                </td>
+
+                                <td>
+                                    {{ $order->seller->FullName }}
+                                </td>
+
+                                <td>
+                                    {{ number_format($order->order_total ,0,',') }} تومان
+                                </td>
+
+
+                                <td>
+                                    @if ($order->cleared)
+                                        <i class="fa fa-check" style="color:green"></i>
+                                    @else
+                                        <i class="fa fa-times" style="color:red"></i>
+                                    @endif
+                                </td>
+
+
+                                
+                                <td class=" last">
+
+                                    @if ($order->cleared)
+                                        <a href="{{ route('admin-orders-unclear', $order->id) }}" class="btn btn-danger">
+                                            {{ __('تسویه نشده') }}
+                                        </a>
+                                    @else
+                                    <a href="{{ route('admin-orders-clear', $order->id) }}" class="btn btn-primary">
+                                        {{ __('تسویه شده') }}
+                                    </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    {{ __('محصولات') }}
+                </h2>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table" id="branches-table">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title" style="display: table-cell">{{ __('شناسه') }}</th>
+                                <th class="column-title" style="display: table-cell">{{ __('عکس') }}</th>
+                                <th class="column-title" style="display: table-cell;">{{ __('نام') }}</th>
+                                <th class="column-title" style="display: table-cell;">قیمت واحد</th>
+                                <th class="column-title" style="display: table-cell;">تعداد</th>
+                                <th class="column-title" style="display: table-cell;">قیمت کل</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($order->products as $product)
+                                <tr class="even pointer">
+                                    <td>
+                                        {{ $product->id }}
+                                    </td>
+                                    
+                                    <td>
+                                        <img width="200" src="{{ $product->media_url }}" alt="">
+                                    </td>
+
+                                    <td>
+                                        {{ $product->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ number_format($product->pivot->price ,0,',') }}
+                                    </td>
+
+                                    <td>
+                                        {{ $product->pivot->quantity }}
+                                    </td>
+
+                                    <td>
+                                        {{ number_format($product->pivot->quantity * $product->pivot->price ,0,',') }}
+                                    </td>
+
+                                    
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
