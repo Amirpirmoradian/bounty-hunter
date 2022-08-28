@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OffCodeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +31,39 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('shop/remove-from-cart/{productId}/{sellerId}', [ProductController::class, 'removeFromCart'])->name('removeFromCart');
     Route::get('cart', [CartController::class, 'getCart'])->name('cart');
     Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+});
+
+
+Route::group([
+    'prefix' => '/admin',
+    'middleware' => ['auth'],
+], function () {
+    Route::get('/', [AdminController::class, 'index']);
+    Route::resource('/users', UserController::class, [
+        'names' => [
+            'index' => 'admin-users-list',
+            'edit' => 'admin-users-edit',
+            'destroy' => 'admin-users-delete',
+            'update' => 'admin-users-update',
+        ],
+    ]);
+
+    Route::resource('/products', ProductController::class, [
+        'names' => [
+            'index' => 'admin-products-list',
+            'edit' => 'admin-products-edit',
+            'destroy' => 'admin-products-delete',
+            'update' => 'admin-products-update',
+        ],
+    ]);
+
+    Route::resource('/orders', OrderController::class, [
+        'names' => [
+            'index' => 'admin-orders-list',
+            'show' => 'admin-orders-show',
+            'destroy' => 'admin-orders-delete',
+            'update' => 'admin-orders-update',
+        ],
+    ]);
+    Route::redirect('/', route('admin-orders-list'));
 });

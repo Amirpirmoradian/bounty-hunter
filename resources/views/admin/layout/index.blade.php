@@ -64,95 +64,27 @@
                         <div class="menu_section">
                             <h3>{{ __('عمومی') }}</h3>
                             <ul class="nav side-menu">
-                                {{-- @can('view tournaments')
-                                    <li>
-                                        <a href="{{ route('admin-tournaments-list') }}">
-                                            <i class="far fa-futbol"></i>
-                                            {{ __('Tourmanets') }}
-                                        </a>
-                                    </li>
-                                @endcan
 
-                                @can('view matches')
-                                    <li>
-                                        <a href="{{ route('admin-matches-list') }}">
-                                            <i class="fas fa-gamepad"></i>
-                                            {{ __('Matches') }}
-                                        </a>
-                                    </li>
-                                @endcan
+                                <li>
+                                    <a href="{{ route('admin-orders-list') }}">
+                                        <i class="fad fa-money-bill-alt"></i>
+                                        سفارشات
+                                    </a>
+                                </li>
 
-                                @can('view disputes')
-                                    <li>
-                                        <a href="{{ route('admin-disputes-list') }}">
-                                            <i class="fas fa-utensils-alt"></i>
-                                            {{ __('Disputes') }}
-                                        </a>
-                                    </li>
-                                @endcan
+                                <li>
+                                    <a href="{{ route('admin-products-list') }}">
+                                        <i class="fas fa-cogs"></i>
+                                        {{ __('محصولات') }}
+                                    </a>
+                                </li>
 
-                                @can('view payments')
-                                    <li>
-                                        <a href="{{ route('admin-payments-list') }}">
-                                            <i class="fad fa-money-bill-alt"></i>
-                                            {{ __('Payments') }}
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('view slides')
-                                    <li>
-                                        <a href="{{ route('admin-sliders-list') }}">
-                                            <i class="fas fa-presentation"></i>
-                                            {{ __('Sliders') }}
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('view games')
-                                    <li>
-                                        <a href="{{ route('admin-games-list') }}">
-                                            <i class="fas fa-dice"></i>
-                                            {{ __('Games') }}
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('view consoles')
-                                    <li>
-                                        <a href="{{ route('admin-consoles-list') }}">
-                                            <i class="fas fa-gamepad"></i>
-                                            {{ __('Consoles') }}
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('view social-medias')
-                                    <li>
-                                        <a href="{{ route('admin-social-medias-list') }}">
-                                            <i class="fas fa-share-alt"></i>
-                                            {{ __('Social Medias') }}
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('view users')
-                                    <li>
-                                        <a href="{{ route('admin-users-list') }}">
-                                            <i class="fas fa-user"></i>
-                                            {{ __('Users') }}
-                                        </a>
-                                    </li>
-                                @endcan
-                                
-                                @can('view settings')
-                                    <li>
-                                        <a href="{{ route('admin-options-list') }}">
-                                            <i class="fas fa-cogs"></i>
-                                            {{ __('Options') }}
-                                        </a>
-                                    </li>
-                                @endcan --}}
+                                <li>
+                                    <a href="{{ route('admin-users-list') }}">
+                                        <i class="fas fa-user"></i>
+                                        کاربران
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
