@@ -80,9 +80,16 @@
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('admin-users-list') }}">
+                                    <a href="{{ route('admin-customers-list') }}">
                                         <i class="fas fa-user"></i>
-                                        کاربران
+                                        مشتریان
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('admin-sellers-list') }}">
+                                        <i class="fas fa-user"></i>
+                                        فروشندگان
                                     </a>
                                 </li>
                             </ul>

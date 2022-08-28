@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->enum('type', array('admin', 'client', 'seller'));
+            $table->enum('type', array('admin', 'customer', 'seller'));
             $table->string('username')->nullable();
             $table->string('saloon_name')->nullable();
             $table->string('phone_number')->unique();

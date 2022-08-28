@@ -43,5 +43,16 @@ class CreateAdminUserSeeder extends Seeder
         ]);
         $user->assignRole([$role->id]);
 
+
+        $user = User::create([
+            'first_name' => 'مرتضی', 
+            'last_name' => 'پیرمرادیان', 
+            'type' => 'customer', 
+            'username' => 'morteza', 
+            'phone_number' => '09131223228', 
+            'mootanroo_id' => '',
+            'phone_number_verified_at' => now()
+        ]);
+
     }
 }

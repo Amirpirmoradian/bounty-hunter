@@ -3,9 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OffCodeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,14 +41,7 @@ Route::group([
     'middleware' => ['auth'],
 ], function () {
     Route::get('/', [AdminController::class, 'index']);
-    Route::resource('/users', UserController::class, [
-        'names' => [
-            'index' => 'admin-users-list',
-            'edit' => 'admin-users-edit',
-            'destroy' => 'admin-users-delete',
-            'update' => 'admin-users-update',
-        ],
-    ]);
+    
 
     Route::resource('/products', ProductController::class, [
         'names' => [
@@ -63,8 +58,29 @@ Route::group([
             'show' => 'admin-orders-show',
         ],
     ]);
+    
     Route::get('clear/{order}', [OrderController::class, 'clear'])->name('admin-orders-clear');
     Route::get('unclear/{order}', [OrderController::class, 'unclear'])->name('admin-orders-unclear');
+
+
+    Route::resource('/customers', CustomerController::class, [
+        'names' => [
+            'index' => 'admin-customers-list',
+            'edit' => 'admin-customers-edit',
+            'destroy' => 'admin-customers-delete',
+            'update' => 'admin-customers-update',
+        ],
+    ]);
+
+    Route::resource('/sellers', SellerController::class, [
+        'names' => [
+            'index' => 'admin-sellers-list',
+            'edit' => 'admin-sellers-edit',
+            'destroy' => 'admin-sellers-delete',
+            'update' => 'admin-sellers-update',
+        ],
+    ]);
+
 
 
     Route::redirect('/', route('admin-orders-list'));

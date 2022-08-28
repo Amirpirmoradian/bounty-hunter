@@ -24,6 +24,9 @@ class OffCodeController extends Controller
                 $offcode->customer_id = $user->id;
                 $offcode->save();
 
+                $user->referred_by = $seller->id;
+                $user->save();
+                
                 try{
                     $result = Kavenegar::VerifyLookup($user->phone_number, $offcode->code, '', '', 'bounty-offcode');
                 }catch(\Kavenegar\Exceptions\ApiException $e){

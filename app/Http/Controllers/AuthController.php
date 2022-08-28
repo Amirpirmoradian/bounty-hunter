@@ -109,6 +109,7 @@ class AuthController extends Controller
                     'mootanroo_id'  => $response->result->userInfo->id,
                     'phone_number_verified_at'  => now(),
                     'referred_by'  => $referredBy,
+                    'type'  => 'customer',
                 ]);
             }
 
