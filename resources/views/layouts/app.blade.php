@@ -34,7 +34,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @if(auth()->user()->type == "seller" || auth()->user()->type == "admin")
+                        @if(auth()->user() != null && (auth()->user()->type == "seller" || auth()->user()->type == "admin"))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('panel') }}">{{ __('پنل') }}</a>
                             </li>

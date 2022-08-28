@@ -19,8 +19,8 @@ class FakeOffCodeSeeder extends Seeder
             $faker = \Faker\Factory::create();
 
             DB::table("off_codes")->insert([
-                "code" => 'piramir77-' . explode('-', $faker->Uuid())[0],
-                "seller_id" => 1,
+                "code" => 'dashti-' . explode('-', $faker->Uuid())[0],
+                "seller_id" => 4,
             ]);
         }
     }
