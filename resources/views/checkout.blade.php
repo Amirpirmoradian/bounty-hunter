@@ -27,7 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {{-- @foreach ($cart['products'] as $product)
+                                @foreach ($cart['products'] as $product)
                                     <tr>
                                         <td>{{ $product['data']['name'] }}</td>
                                         <td>x{{ $product['quantity'] }}</td>
@@ -35,7 +35,14 @@
                                             {{ number_format($product['quantity'] * $product['data']['price'], 0,',') }} تومان
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
+                                <tr>
+                                    <td>جمع کل</td>
+                                    <td>-</td>
+                                    <td>
+                                        {{ number_format($cart['total'], 0,',') }} تومان
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

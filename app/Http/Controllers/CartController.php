@@ -26,6 +26,11 @@ class CartController extends Controller
     {
         $cart = session('cart');
         if ($cart != null) {
+
+            foreach ($cart['products'] as $productId => $productKey) {
+                $cart['products'][$productId]['data'] = Product::find($productId)->toArray();
+            }
+
             $customer = auth()->user();
             $seller = User::find($cart['sellerId']);
             $order = Order::create([
@@ -41,11 +46,17 @@ class CartController extends Controller
                     'price' => Product::find($productId)->price,
                     'quantity' => $product['quantity']
                 ]);
+
+                DB::table('product_seller')->where('product_id', $productId)->where('seller_id', $cart['sellerId'])->update([
+                    'quantity' => DB::table('product_seller')->where('product_id', $productId)->where('seller_id', $cart['sellerId'])->first()->quantity - $product['quantity'],
+                ]);
             }
+
             //TODO we need to check for remaining quantity in seller saloon
             session()->flash('cart');
 
-            return view('checkout', compact('order', 'seller'));
+            return view('checkout', compact('order', 'seller', 'cart'));
         }
+        
     }
 }

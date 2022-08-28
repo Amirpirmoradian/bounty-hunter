@@ -117,7 +117,7 @@ class ProductController extends Controller
     {
         $user = auth()->user();
 
-        if(User::where('username', $seller)->exists()){
+        if(User::where('username', $seller)->where('type', 'seller')->exists()){
             $sellerId = User::where('username', $seller) ->first()->id;
             $productsInStock = DB::table('product_seller')->where('seller_id', $sellerId)->where('quantity', '!=', 0)->get()->pluck('product_id')->toArray();
             $products = Product::whereIn('id', $productsInStock)->get();
