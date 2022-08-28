@@ -54,5 +54,17 @@ class CreateAdminUserSeeder extends Seeder
             'phone_number_verified_at' => now()
         ]);
 
+
+        $user = User::create([
+            'first_name' => 'مهدی', 
+            'last_name' => 'دشتی', 
+            'username' => 'dashti', 
+            'type' => 'seller', 
+            'saloon_name' => 'آفرینا', 
+            'phone_number' => '09131223225', 
+            'mootanroo_id' => '',
+            'phone_number_verified_at' => now()
+        ]);
+
     }
 }

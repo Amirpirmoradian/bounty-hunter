@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SellerController extends Controller
 {
@@ -13,7 +16,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $sellers = User::where('type', 'seller')->paginate(15);
+        return view('admin.sellers.index', compact('sellers'));
     }
 
     /**
@@ -45,7 +49,10 @@ class SellerController extends Controller
      */
     public function show($id)
     {
-        //
+        $seller = User::find($id);
+        $products = Product::all();
+        return view('admin.sellers.show', compact('seller', 'products'));
+
     }
 
     /**
@@ -80,5 +87,34 @@ class SellerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addProduct(Request $request, $id)
+    {
+        $seller = User::find($id);
+
+        if(DB::table('product_seller')->where('seller_id', $seller->id)->where('product_id', $request->product_id)->exists()){
+            $inventory = DB::table('product_seller')->where('seller_id', $seller->id)->where('product_id', $request->product_id)->first();
+            DB::table('product_seller')->where('seller_id', $seller->id)->where('product_id', $request->product_id)->update([
+                'quantity' => $inventory->quantity + $request->quantity
+            ]);
+        }else{
+            DB::table('product_seller')->insert([
+                'product_id' => $request->product_id,
+                'seller_id' => $seller->id,
+                'quantity' => $request->quantity
+            ]);
+        }
+
+        return redirect()->back()->with('success', trans('محصول با موفقیت اضافه شد.'));
+    }
+
+
+    public function removeProduct(Request $request, $sellerId, $productId)
+    {
+        
+        DB::table('product_seller')->where('seller_id', $sellerId)->where('product_id', $productId)->delete();
+
+        return redirect()->back()->with('success', trans('محصول با موفقیت حذف شد.'));
     }
 }

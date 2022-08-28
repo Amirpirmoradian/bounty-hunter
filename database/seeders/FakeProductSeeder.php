@@ -66,7 +66,7 @@ class FakeProductSeeder extends Seeder
         foreach($products as $product){
             DB::table('product_seller')->insert([
                 'product_id' => $product,
-                'seller_id' => 1,
+                'seller_id' => 4,
                 'quantity' => $faker->randomNumber(1),
             ]);
         }

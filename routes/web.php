@@ -66,20 +66,19 @@ Route::group([
     Route::resource('/customers', CustomerController::class, [
         'names' => [
             'index' => 'admin-customers-list',
-            'edit' => 'admin-customers-edit',
-            'destroy' => 'admin-customers-delete',
-            'update' => 'admin-customers-update',
         ],
     ]);
 
     Route::resource('/sellers', SellerController::class, [
         'names' => [
             'index' => 'admin-sellers-list',
-            'edit' => 'admin-sellers-edit',
-            'destroy' => 'admin-sellers-delete',
-            'update' => 'admin-sellers-update',
+            'show' => 'admin-sellers-show',
         ],
     ]);
+
+    Route::post('sellers/add-product/{seller}', [SellerController::class, 'addProduct'])->name('admin-sellers-add-product');
+    Route::get('sellers/remove-product/{seller}/{product}', [SellerController::class, 'removeProduct'])->name('admin-sellers-remove-product');
+
 
 
 
