@@ -63,9 +63,9 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="cart-checkout btn btn-primary">
-                        ثبت سفارش خرید
-                    </div>
+                    <a href="{{ route('cart') }}" class="cart-checkout btn btn-primary">
+                        مشاهده کامل سبد خرید
+                    </a>
                 
                 </div>
             @endif

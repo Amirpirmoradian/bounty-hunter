@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OffCodeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('shop/{seller}', [ProductController::class, 'GetShop']);
     Route::get('shop/add-to-cart/{productId}/{sellerId}', [ProductController::class, 'addToCart'])->name('addToCart');
     Route::get('shop/remove-from-cart/{productId}/{sellerId}', [ProductController::class, 'removeFromCart'])->name('removeFromCart');
-    
+    Route::get('cart', [CartController::class, 'getCart'])->name('cart');
+    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
 });

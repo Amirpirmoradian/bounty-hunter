@@ -147,3 +147,14 @@ a:hover {
 .shop-card{
     margin-bottom: 100px;
 }
+
+
+.product-link{
+    margin-bottom: 40px;
+}
+
+.back-to-shop{
+    float: left;
+    color: #D60644;
+    text-decoration: underline;
+}
