@@ -3,8 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OffCodeController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +23,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('offcode/{seller}', [OffCodeController::class, 'getOffcode']);
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
+    Route::get('shop/{seller}', [ProductController::class, 'GetShop']);
+    Route::get('shop/add-to-cart/{productId}/{sellerId}', [ProductController::class, 'addToCart'])->name('addToCart');
+    Route::get('shop/remove-from-cart/{productId}/{sellerId}', [ProductController::class, 'removeFromCart'])->name('removeFromCart');
+    
 });

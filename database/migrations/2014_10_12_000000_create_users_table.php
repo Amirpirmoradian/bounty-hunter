@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->enum('type', array('admin', 'client', 'seller'));
             $table->string('username')->nullable();
+            $table->string('saloon_name')->nullable();
             $table->string('phone_number')->unique();
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->integer('mootanroo_id');

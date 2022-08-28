@@ -23,6 +23,7 @@ class User extends Authenticatable
         'last_name',
         'type',
         'username',
+        'saloon_name',
         'mootanroo_id',
         'phone_number',
         'password',

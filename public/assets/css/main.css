@@ -1,46 +1,149 @@
 @import url('https://v1.fontapi.ir/css/Vazir');
 
-body{
+body {
     font-family: 'Vazir', sans-serif;
 }
-.navbar-light .navbar-brand, .navbar-light .navbar-brand img{
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand img {
     width: 120px;
     display: block;
     margin: 20px auto 0;
 }
-.btn{
+
+.btn {
     border-radius: 15px;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: #D60644;
     border-color: #D60644;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: white;
     color: #D60644;
     border-color: #D60644;
 }
 
 
-.btn-secendary{
+.btn-secendary {
     background-color: #c0c0c0;
     border-color: #c0c0c0;
 }
 
-.btn-secendary:hover{
+.btn-secendary:hover {
     color: white;
 }
 
-.offcode-container{
+.offcode-container {
     text-align: center;
 }
 
-.offcode{
+.offcode {
     margin: 20px 0;
     border-radius: 15px;
     border: 3px solid #D60644;
     padding: 5px 20px;
     display: inline-block;
     font-weight: bold;
+}
+
+.product-picture {
+    width: 25%;
+    float: right;
+}
+
+.product-picture img {
+    width: 100%;
+
+}
+
+.product-meta {
+    width: 75%;
+    float: left;
+    height: 100%;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: unset;
+}
+
+.product-add-to-cart {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.product-meta {
+    position: relative;
+}
+
+.product-item {
+    margin: 10px 0;
+    padding: 30px 10px;
+
+}
+
+.product-item:not(:last-child) {
+    border-bottom: 2px solid #D60644;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.product-price {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 40px;
+    line-height: 40px;
+}
+
+
+.login-form p, .login-form h2{
+    text-align: center;
+}
+
+.product-add-to-cart a{
+    min-width: 40px;
+}
+
+
+.cart-container{
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    border-top: 2px solid #D60644;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.cart-items{
+    width: 50%;
+    float: right;
+    padding: 10px 0;
+}
+
+.cart-total{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding: 10px 0;
+
+}
+
+.cart-checkout{
+    width: 100%;
+}
+
+.shop-card{
+    margin-bottom: 100px;
 }

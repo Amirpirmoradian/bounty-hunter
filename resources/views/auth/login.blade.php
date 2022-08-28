@@ -7,7 +7,11 @@
             <div class="card">
                 <div class="card-header">{{ __('ورود') }}</div>
 
-                <div class="card-body">
+                <div class="card-body login-form">
+                    @if($saloonName != null)
+                        <h2>به مو‌تن‌رو، فروشگاه ارایشی و بهداشتی خوش آمدید.</h2>
+                        <p>باعث افتخار ماست که به شما مشتری گرامی سالن آرایش و زیبایی {{$saloonName}}، هدیه‌ای ارزشمند از طرف مو‌تن‌رو تقدیم کنیم.</p>
+                    @endif
                     <form method="GET" action="{{ route('verify') }}">
                         <div class="row mb-3">
                             <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ __('شماره موبایل') }}</label>

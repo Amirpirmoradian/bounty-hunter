@@ -16,10 +16,14 @@ class AuthController extends Controller
 
     public function showLoginForm($seller = null)
     {
+        $saloonName = null;
         if($seller != null){
             Cookie::queue('referred_by', $seller, 3600);
+            if(User::where('username', $seller)->exists()){
+                $saloonName = User::where('username', $seller)->first()->saloon_name;
+            }
         }
-        return view('auth.login');
+        return view('auth.login', compact('saloonName'));
     }
 
     public function showVerifyForm(VerifyRequest $request)

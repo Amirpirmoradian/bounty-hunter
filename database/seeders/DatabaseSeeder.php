@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             CreateAdminUserSeeder::class,
             FakeOffCodeSeeder::class,
+            FakeProductSeeder::class
         ]);
     }
 }

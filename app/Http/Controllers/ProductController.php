@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
     
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
-    
+use Illuminate\Support\Facades\DB;
+
 class ProductController extends Controller
 { 
     /**
@@ -114,5 +116,70 @@ class ProductController extends Controller
     
         return redirect()->route('products.index')
                         ->with('success','Product deleted successfully');
+    }
+
+
+    public function GetShop(Request $request, $seller)
+    {
+        $user = auth()->user();
+
+        if(User::where('username', $seller)->exists()){
+            $sellerId = User::where('username', $seller) ->first()->id;
+            $productsInStock = DB::table('product_seller')->where('seller_id', $sellerId)->where('quantity', '!=', 0)->get()->pluck('product_id')->toArray();
+            $products = Product::whereIn('id', $productsInStock)->get();
+            return view('shop', compact('products', 'sellerId'));
+        }
+
+        return abort(404, 'Not found');
+    }
+
+    public function addToCart(Request $request, $productId, $sellerId)
+    {
+        $product = Product::find($productId);
+        $cart = session('cart');
+        if($cart == null){
+            $cart = [
+                'sellerId' => $sellerId,
+                'products'  => [
+                    $productId => [
+                        "quantity" => 1,
+                    ]
+                ],
+                'totalquantity' => 1,
+                'total' => $product->price
+            ];
+            session()->put('cart', $cart);
+        }else{
+            if(isset($cart['products'][$productId])){
+                $cart['products'][$productId]['quantity'] = $cart['products'][$productId]['quantity'] + 1;
+            }else{
+                $cart['products'][$productId]['quantity'] = 1;
+            }
+            $cart['totalquantity'] = $cart['totalquantity'] + 1;
+            $cart['total'] = $cart['total'] + $product->price;
+            session()->put('cart', $cart);
+        }
+       
+        return redirect()->back();
+        
+        
+    }
+
+    public function removeFromCart(Request $request, $productId, $sellerId)
+    {
+        $cart = session('cart');
+        $product = Product::find($productId);
+        if($cart != null){
+            if($cart['products'][$productId]['quantity']> 1){
+                $cart['products'][$productId]['quantity'] = $cart['products'][$productId]['quantity'] - 1;
+            }else{
+                unset($cart['products'][$productId]);
+            }
+            $cart['totalquantity'] = $cart['totalquantity'] - 1;
+            $cart['total'] = $cart['total'] - $product->price;
+            session()->put('cart', $cart);
+        }
+        return redirect()->back();
+        
     }
 }

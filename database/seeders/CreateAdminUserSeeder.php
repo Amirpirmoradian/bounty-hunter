@@ -21,6 +21,7 @@ class CreateAdminUserSeeder extends Seeder
             'last_name' => 'پیرمرادیان', 
             'type' => 'admin', 
             'username' => 'piramir77', 
+            'saloon_name' => 'آفرینا', 
             'phone_number' => '09134744677', 
             'mootanroo_id' => '275284',
             'phone_number_verified_at' => now()
@@ -35,6 +36,7 @@ class CreateAdminUserSeeder extends Seeder
             'last_name' => 'قائم مقامی', 
             'username' => 'webgodo', 
             'type' => 'admin', 
+            'saloon_name' => 'محمدی', 
             'phone_number' => '09131678992', 
             'mootanroo_id' => '272419',
             'phone_number_verified_at' => now()

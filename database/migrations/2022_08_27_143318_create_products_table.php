@@ -17,8 +17,16 @@ return new class extends Migration
             $table->id();
             $table->integer('mootanroo_id');
             $table->string('name');
-            $table->decimal('price');
-            $table->integer('media_id');
+            $table->decimal('price', 20);
+            $table->tinyText('media_url');
+            $table->timestamps();
+        });
+
+        Schema::create('product_seller', function (Blueprint $table) {
+            $table->id();
+            $table->integer('product_id');
+            $table->string('seller_id');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -31,5 +39,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+        Schema::dropIfExists('product_seller');
     }
 };
