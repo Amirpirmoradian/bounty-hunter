@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,9 +62,12 @@ class PanelController extends Controller
     }
 
 
-    public function orders(Request $request)
+    public function orders(Request $request, $order)
     {
-        # code...
+        $order = Order::find($order);
+
+        return view('panel.order', compact('order'));
+
     }
     
 
