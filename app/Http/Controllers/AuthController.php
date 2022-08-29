@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function showLoginForm($seller = null)
     {
-        Auth::login(User::find(4));
+        // Auth::login(User::find(4));
 
         $saloonName = null;
         if($seller != null){
