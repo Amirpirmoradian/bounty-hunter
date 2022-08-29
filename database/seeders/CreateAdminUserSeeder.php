@@ -50,6 +50,7 @@ class CreateAdminUserSeeder extends Seeder
             'type' => 'customer', 
             'username' => 'morteza', 
             'phone_number' => '09131223228', 
+            'mootanroo_id' => '12321',
             'phone_number_verified_at' => now()
         ]);
 
@@ -61,6 +62,7 @@ class CreateAdminUserSeeder extends Seeder
             'type' => 'seller', 
             'saloon_name' => 'آفرینا', 
             'phone_number' => '09131223225', 
+            'mootanroo_id' => '1245433',
             'phone_number_verified_at' => now()
         ]);
 
