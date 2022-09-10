@@ -3,6 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
 
 class Authenticate extends Middleware
 {
@@ -14,6 +17,13 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        
+        Cookie::queue('askedURL', Request::path(), 3600);
+
+        if($request->routeIs('getOffcode')){
+            return route('login', $request->route('seller'));
+        }
+
         if (! $request->expectsJson()) {
             return route('login');
         }

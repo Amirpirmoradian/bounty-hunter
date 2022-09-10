@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card referrals-card">
                 <div class="card-header">
-                    {{ __('سفارشات') }}
+                    {{ __('موجودی') }}
                 </div>
 
                 <div class="card-body">

@@ -16,8 +16,22 @@ class AuthController extends Controller
 
     public function showLoginForm($seller = null)
     {
-        // Auth::login(User::find(4));
-
+        // Auth::login(User::find(1));
+        $user = auth()->user();
+        if($user != null){
+            switch($user->type){
+                case 'admin':
+                    return redirect('/admin');
+                    break;
+                case 'seller':
+                    return redirect('/panel');
+                    break;
+                case 'client':
+                    return redirect('/shop/');
+                    break;
+            }
+                
+        }
         $saloonName = null;
         if($seller != null){
             Cookie::queue('referred_by', $seller, 3600);
@@ -104,7 +118,7 @@ class AuthController extends Controller
                         $referredBy = User::where('username', Cookie::get('referred_by', false))->first()->id;
                     }
                 }
-                Customers::create([
+                User::create([
                     'phone_number' => $phoneNumber,
                     'first_name'    => $response->result->userInfo->firstName,
                     'last_name'    => $response->result->userInfo->lastName,

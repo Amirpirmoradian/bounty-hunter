@@ -28,7 +28,7 @@ Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('verify');
 Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('offcode/{seller}', [OffCodeController::class, 'getOffcode']);
+    Route::get('offcode/{seller}', [OffCodeController::class, 'getOffcode'])->name('getOffcode');
     Route::get('shop/{seller}', [ProductController::class, 'GetShop']);
     Route::get('shop/add-to-cart/{productId}/{sellerId}', [ProductController::class, 'addToCart'])->name('addToCart');
     Route::get('shop/remove-from-cart/{productId}/{sellerId}', [ProductController::class, 'removeFromCart'])->name('removeFromCart');
